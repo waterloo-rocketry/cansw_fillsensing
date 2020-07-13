@@ -53,8 +53,8 @@ void pin_init() {
 
 
     // enable interrupt-on-change for RB and RC on rising edge
-    IOCBP = 0b11111111;
-    IOCCP = 0b11111111;
+    IOCBN = 0b11111111;
+    IOCCN = 0b11111111;
 
 
     // disable analog inputs
