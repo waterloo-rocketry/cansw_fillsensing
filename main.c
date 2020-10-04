@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
         // heartbeat LED
         if (millis() - 1000 > last_millis){
             last_millis = millis();
-            BLUE = BLUE == 1 ? 0 : 1;
+            BLUE = !BLUE;
         }
     }
 

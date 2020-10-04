@@ -27,16 +27,5 @@
 
 void fill_handle_interrupt(volatile uint8_t* fill);
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
 #endif	/* PROCESS_FILL_H */
 

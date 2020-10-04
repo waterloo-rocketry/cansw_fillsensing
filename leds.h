@@ -14,16 +14,4 @@
 // function to test board; red and white LEDs should alternate every second
 void leds();
 
-#ifdef	__cplusplus
-extern "C" {
 #endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* LEDS_H */
-

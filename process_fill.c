@@ -3,7 +3,7 @@
 
 void update_fill(volatile uint8_t* fill, uint8_t new_fill) {
     // indicator LED
-    RED = RED == 1 ? 0 : 1;
+    RED = !RED;
 
     // update the fill level
     *fill = new_fill;
