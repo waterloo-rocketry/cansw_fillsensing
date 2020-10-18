@@ -1,6 +1,4 @@
 // TODO(wendi): init external oscillator, then change this to 12MHz
-#define _XTAL_FREQ 1000000
-
 #include <stdint.h>
 #include "mcc_generated_files/mcc.h"
 #include "canlib/pic18f26k83/pic18f26k83_timer.h"
