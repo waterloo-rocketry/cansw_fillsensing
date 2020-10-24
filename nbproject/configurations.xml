@@ -4,6 +4,16 @@
     <logicalFolder name="f1" displayName="canlib" projectFiles="true">
       <itemPath>canlib/pic18f26k83/pic18f26k83_timer.c</itemPath>
       <itemPath>canlib/pic18f26k83/pic18f26k83_timer.h</itemPath>
+      <itemPath>canlib/can_common.c</itemPath>
+      <itemPath>canlib/can_common.h</itemPath>
+      <itemPath>canlib/message_types.h</itemPath>
+      <itemPath>canlib/pic18f26k83/pic18f26k83_can.c</itemPath>
+      <itemPath>canlib/pic18f26k83/pic18f26k83_can.h</itemPath>
+      <itemPath>canlib/can.h</itemPath>
+      <itemPath>canlib/util/can_tx_buffer.c</itemPath>
+      <itemPath>canlib/util/can_tx_buffer.h</itemPath>
+      <itemPath>canlib/util/timing_util.c</itemPath>
+      <itemPath>canlib/util/timing_util.h</itemPath>
     </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
