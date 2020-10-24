@@ -58,6 +58,11 @@ static void __interrupt() interrupt_handler() {
         timer0_handle_interrupt();
         PIR3bits.TMR0IF = 0;
     }
+    
+    // handle CAN interrupts
+    if (PIR5) {
+        can_handle_interrupt();
+    }
 }
 
 int main(int argc, char** argv) {
