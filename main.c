@@ -2,10 +2,8 @@
 #include <stdint.h>
 #include "mcc_generated_files/mcc.h"
 
-#include "canlib/can.h"
 #include "canlib/can_common.h"
 #include "canlib/pic18f26k83/pic18f26k83_can.h"
-#include "canlib/message_types.h"
 #include "canlib/util/timing_util.h"
 #include "canlib/util/can_tx_buffer.h"
 #include "canlib/pic18f26k83/pic18f26k83_timer.h"
@@ -23,7 +21,7 @@ volatile uint8_t direction = 0;
 uint8_t tx_pool[100];
 
 // Don't need to receive messages?
-static void can_msg_handler(const can_msg_t *msg) {};
+static void can_msg_handler(const can_msg_t *msg);
 
 void pin_init() {
     // set RA as an output port (for LEDs)
@@ -100,6 +98,7 @@ int main(int argc, char** argv) {
     
     // initialize misc variables
     fill_level = 0;
+    direction = 0;
     uint32_t last_millis = millis();
 
     // main loop
@@ -126,4 +125,27 @@ int main(int argc, char** argv) {
     }
 
     return (EXIT_SUCCESS);
+}
+
+static void can_msg_handler(const can_msg_t *msg) {
+    uint16_t msg_type = get_message_type(msg);
+
+    switch (msg_type) {
+
+        case MSG_LEDS_ON:
+            RED = 1;
+            BLUE = 1;
+            WHITE = 1;
+            break;
+
+        case MSG_LEDS_OFF:
+            RED = 0;
+            BLUE = 0;
+            WHITE = 0;
+            break;
+
+        default:
+            // this is where we go for all the messages we don't care about
+            break;
+    }
 }
