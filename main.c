@@ -20,8 +20,9 @@ volatile uint8_t direction = 0;
 // Memory pool for CAN transmit buffer
 uint8_t tx_pool[100];
 
-// Don't need to receive messages?
 static void can_msg_handler(const can_msg_t *msg);
+static void send_status_ok(void);
+static void send_fill_level(void);
 
 void pin_init() {
     // set RA as an output port (for LEDs)
@@ -110,13 +111,9 @@ int main(int argc, char** argv) {
             // heartbeat LED
             BLUE = !BLUE;
             
-            can_msg_t fill_msg;
-            build_fill_msg(millis(),
-                           fill_level,
-                           direction,
-                           &fill_msg);
-            
-            txb_enqueue(&fill_msg);
+            send_fill_level();
+
+            send_status_ok();
         }
         
         // send queued messages
@@ -148,4 +145,24 @@ static void can_msg_handler(const can_msg_t *msg) {
             // this is where we go for all the messages we don't care about
             break;
     }
+}
+
+// Send a CAN message with nominal status
+static void send_status_ok(void) {
+    can_msg_t board_stat_msg;
+    build_board_stat_msg(millis(), E_NOMINAL, NULL, 0, &board_stat_msg);
+
+    // send it off at low priority
+    txb_enqueue(&board_stat_msg);
+}
+
+// send fill sensing message
+static void send_fill_level(void) {
+    can_msg_t fill_msg;
+    build_fill_msg(millis(),
+                    fill_level,
+                    direction,
+                    &fill_msg);
+    
+    txb_enqueue(&fill_msg);
 }
