@@ -13,11 +13,11 @@ void pin_init() {
     TRISA = 0b00000000;
 
     // set RB and RC as input ports
-    TRISB = 0b11111111;
+    TRISB = 0b00111111;
     TRISC = 0b11111111;
 
     // enable interrupt-on-change for RB and RC on falling edge
-    IOCBN = 0b11111111;
+    IOCBN = 0b00111111;
     IOCCN = 0b11111111;
 
     // disable analog inputs
