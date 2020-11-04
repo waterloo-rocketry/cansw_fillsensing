@@ -7,9 +7,9 @@
 #include "canlib/pic18f26k83/pic18f26k83_timer.h"
 
 // QOL LED macros
-#define WHITE LATA3
-#define BLUE LATA4
-#define RED LATA5
+#define WHITE_LED LATA3
+#define BLUE_LED LATA4
+#define RED_LED LATA5
 
 // function to test board; red and white LEDs should alternate every second
 void leds();
