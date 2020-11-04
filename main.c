@@ -14,8 +14,8 @@
 #define MAX_LOOP_TIME_DIFF_ms 1000
 
 // variable that stores current fill level
-volatile uint8_t fill_level = 0;
-volatile uint8_t direction = 0;
+volatile uint8_t fill_level;
+volatile uint8_t direction;
 
 // Memory pool for CAN transmit buffer
 uint8_t tx_pool[100];
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
             last_millis = millis();
             
             // heartbeat LED
-            BLUE = !BLUE;
+            BLUE_LED = !BLUE_LED;
             
             send_fill_level();
 
@@ -130,15 +130,15 @@ static void can_msg_handler(const can_msg_t *msg) {
     switch (msg_type) {
 
         case MSG_LEDS_ON:
-            RED = 1;
-            BLUE = 1;
-            WHITE = 1;
+            RED_LED = 1;
+            BLUE_LED = 1;
+            WHITE_LED = 1;
             break;
 
         case MSG_LEDS_OFF:
-            RED = 0;
-            BLUE = 0;
-            WHITE = 0;
+            RED_LED = 0;
+            BLUE_LED = 0;
+            WHITE_LED = 0;
             break;
 
         default:

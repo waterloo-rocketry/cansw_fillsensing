@@ -6,8 +6,8 @@ void leds() {
     while(1) {
         if (millis() - 1000 > last_millis){
             last_millis = millis();
-            RED = !RED;
-            WHITE = !WHITE;
+            RED_LED = !RED_LED;
+            WHITE_LED = !WHITE_LED;
         }
     }
 }
