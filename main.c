@@ -11,7 +11,7 @@
 #include "process_fill.h"
 #include "leds.h"
 
-#define MAX_LOOP_TIME_DIFF_ms 1000
+#define MAX_LOOP_TIME_DIFF_ms 500
 
 // variable that stores current fill level
 volatile uint8_t fill_level;
@@ -25,22 +25,25 @@ static void send_status_ok(void);
 static void send_fill_level(void);
 
 void pin_init() {
-    // set RA as an output port (for LEDs)
-    TRISA = 0b00000000;
+    // set RA port as output or input (for LEDs or fill level)
+    TRISA = 0b00000111;
 
     // set RB and RC as input ports
     TRISB = 0b00111111;
     TRISC = 0b11111111;
 
-    // enable interrupt-on-change for RB and RC on falling edge
+    // enable interrupt-on-change for RA, RB and RC on falling edge
+    IOCAN = 0b00000110;
     IOCBN = 0b00111111;
-    IOCCN = 0b11111111;
+    IOCCN = 0b11111100;
 
     // disable analog inputs
+    ANSELA &= 0b11111001;
     ANSELB = 0b00000000;
     ANSELC = 0b00000000;
 
     // clear flags (just in case)
+    IOCAF = 0b00000000;
     IOCCF = 0b00000000;
     IOCBF = 0b00000000;
 }
@@ -48,7 +51,7 @@ void pin_init() {
 // top level ISR
 static void __interrupt() interrupt_handler() {
     if(HALL_FLAG_REG != 0){
-        fill_handle_interrupt(&fill_level);
+        fill_handle_interrupt(&fill_level, &direction);
     }
     
     // Timer0 has overflowed - update millis() function
