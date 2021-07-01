@@ -7,10 +7,10 @@ void update_fill(volatile uint8_t* fill, volatile uint8_t* direction, uint8_t ne
 
     // update the fill direction
     if (new_fill > *fill){
-        *direction = 0;
+        *direction = FILLING;
     }
     else if (new_fill < *fill){
-        *direction = 1;
+        *direction = EMPTYING;
     }
     // update the fill level
     *fill = new_fill;

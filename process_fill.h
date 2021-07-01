@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <xc.h>
+#include "canlib/message_types.h"
 
 #include "leds.h"
 
